@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Форма обратной связи на PHP с отправкой на почту</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="form.css">
+	<title>форма</title>
+	<script src="https://www.google.com/recaptcha/api.js?render=6LeBOjkaAAAAALwBdeW8uf6fHiuBROnQ7-hj2nwT"></script>
+
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('6LeBOjkaAAAAALwBdeW8uf6fHiuBROnQ7-hj2nwT', { action: 'contact' }).then(function (token) {
+                var recaptchaResponse = document.getElementById('recaptchaResponse');
+                recaptchaResponse.value = token;
+            });
+        });
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<script src="jquery.maskedinput.min.js"></script>
+
+</head>
+<body>
+	<script type="text/javascript">jQuery(function($){$("#phon").mask("+7 (999) 999-99-99");});</script>
+	
+	<!--Данные введенные пользователем обрабатываются кодом в mail.php-->
+  	<form id="cooment-form" action="mail.php" method="post">
+  	<!--	<input type="hidden" name="token" id="token">
+        <input type="hidden" name="action" id="action">     -->
+
+		<h1>Анкета ученика</h1>
+		<fieldset>
+			<legend>Контактная информация</legend>
+		<input type="text" placeholder="Введите имя (обязательное поле)" name="name" required><br>
+		<input type="text" id="phon" placeholder="Введите номер телефона (обязательное поле)" name="phone" required><br>
+		<input type="email" placeholder="Введите email (обязательное поле)" name="email" required><br>
+		</fieldset>
+		<fieldset>
+			<legend>Личная информация</legend>
+		<label>Ваш возраст</label>
+		<input type="number" name="age">
+		<label>Дата рождения</label>
+		<input type="date" id="dat" name="birthdate">
+		<label>По какому курсу занимаетесь</label>
+		<select name="mycourse">
+			<option value="java">java</option>
+			<option value="python">python</option>
+			<option value="html">html</option>
+			<option value="scratch">scratch</option>
+			<option value="c++">c++</option>
+			<option value="c">c</option>
+			<option value="java script">java script</option>
+			<option value="asembler">asembler</option>
+			<option value="php">php</option>
+			<option value="mysql">mysql</option>
+		</select>
+		</fieldset>
+		<fieldset>
+			<legend>Обратная связь</legend>
+		<label>Посоветуете ли вы нас друзьям</label>
+		<input name="fitback" type="radio" value="Yes">
+		<label class="radio">Да</label>
+		<input name="fitback" type="radio" value="I don't know">
+		<label class="radio">Не знаю</label>
+		<input name="fitback" type="radio" value="No">
+		<label class="radio">Нет</label>
+		<label>Оставьте коментарий</label>
+		<textarea rows="5" cols="65" name="message"></textarea>
+		</fieldset>
+		<input type="checkbox" id="check1" name="allow" value="Да">
+		<label class="box">Разрешить обработку данных</label>
+		<input type="checkbox" id="check2" name="news" value="Да">
+		<label class="box">Отправлять новости на почту</label>
+		<input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+		<input type="submit" value="Отправить">
+	</form>
+
+
+</body>
+</html>
